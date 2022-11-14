@@ -2,11 +2,30 @@
 // colors
 :root {
   // base
-  --font-family: "Open Sans", sans-serif;
-  --content-width: 1170px;
+  --content-width: 1180px;
   --container-offset: 15px;
   --container-width: calc(var(--content-width) + (var(--container-offset) * 2));
 
+  // шрифты
+  --font-family: 'Intro', sans-serif;
+  --middle-high-font: 700 30px /140% var(--font-family);
+  --middle-font: 600 16px /140% var(--font-family);
+  --small-font: 400 14px /140% var(--font-family);
+
+
   // colors
-  --light-color: #fff;
+  --color-white: #fff;
+  --color-black: #000;
+  --color-eastbay: #484283;
+  --color-accent: #f14f4f;
+
+
+
+  // отступы
+  --grid-gap: 20px;
+  --main-offset: 40px;
+  --second-offset: 20px;
+
+
+
 }

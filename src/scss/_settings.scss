@@ -92,6 +92,11 @@ a {
   text-align: center;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: --var(--grid-gap);
+}
 .dis-scroll {
   position: fixed;
   left: 0;
@@ -104,4 +109,14 @@ a {
 
 .page--ios .dis-scroll {
   position: relative;
+}
+
+.btn {
+  border-radius: 4px;
+  font: 400 16px /140% var(--font-family);
+  color: var(--color-white);
+
+    &--primary {
+    background-color: var(--color-accent);
+  }
 }
