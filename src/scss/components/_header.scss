@@ -3,9 +3,25 @@
   left: 0;
   top: 0;
   width: 100%;
+  z-index: 100;
+
 
   &__container {
+    --padddings: 15px;
+    position: relative;
     align-items: center;
+    padding: 12px var(--padddings);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: calc(100% - (var(--padddings) * 2));
+      height: 1px;
+      background-color: var(--color-border);
+      transform: translateX(-50%);
+    }
   }
 
   &__left {
@@ -15,6 +31,7 @@
   &__right {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     grid-column: 10 span;
   }
 }

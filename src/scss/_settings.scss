@@ -113,10 +113,16 @@ a {
 
 .btn {
   border-radius: 4px;
+  padding: 22px 47px;
   font: 400 16px /140% var(--font-family);
-  color: var(--color-white);
+  transition: color .3s ease-in-out, background-color .3s ease-in-out ;
 
     &--primary {
     background-color: var(--color-accent);
+    color: var(--color-white);
+
+    &:hover {
+      background-color: var(--color-accent-hover);
+    }
   }
 }
