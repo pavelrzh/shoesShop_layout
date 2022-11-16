@@ -1,12 +1,12 @@
 
 .cart {
-  margin-left: var(--main-offset);
+  margin-left: var(--small-offset);
 
   &__btn {
     position: relative;
     width: 20px;
     height: 20px;
-    font: var(--small-font);
+    font: var(--small-book);
     color: var(--color-white);
 
     svg {
@@ -28,7 +28,7 @@
     height: 16px;
     min-width: 16px;
     background-color: var(--color-accent);
-    font: var(--small-font);
+    font: var(--small-book);
     color: var(--color-white);
   }
 }
