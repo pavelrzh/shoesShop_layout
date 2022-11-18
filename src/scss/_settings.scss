@@ -158,14 +158,19 @@ a {
     color: var(--color-main);
 
     &::before {
-      top: -3px;
+      top: -1px;
       border-color: var(--color-cameo);
       border-radius: 4px;
       width: 24px;
       height: 24px;
+      &:focus {
+        outline: 2px solid blue;
+      }
     }
+    
+
     &::after {
-      top: -3px;
+      top: -1px;
       width: 24px;
       height: 24px;
       background-image: url("../img/check.svg");
@@ -173,5 +178,8 @@ a {
 
     }
   }
+}
 
+.custom-checkbox__field:focus + .custom-checkbox__content::before {
+  outline: none;
 }
