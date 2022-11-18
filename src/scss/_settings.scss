@@ -75,6 +75,13 @@ a {
   clip: rect(0 0 0 0);
 }
 
+.btn-reset {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  font: 400 16px /140% var(--font-family);;
+}
 .container {
   margin: 0 auto;
   padding: 0 var(--container-offset);
@@ -115,21 +122,26 @@ a {
   transition: color .3s ease-in-out, background-color .3s ease-in-out ;
 
     &--primary {
-    background-color: var(--color-accent);
-    color: var(--color-white);
+      background-color: var(--color-accent);
+      color: var(--color-white);
 
     &:hover {
       background-color: var(--color-accent-hover);
     }
   }
+
+  &--secondary {
+    margin-bottom: var(--second-offset);
+    background-color: var(--color-main);
+    color: var(--color-white);
+    width: 100%;
+
+    &:hover {
+      background-color: var(--color-main-hover);
+    }
+  }
 }
 
-.btn-reset {
-  border: none;
-  padding: 0;
-  background-color: transparent;
-  cursor: pointer;
-}
 .title {
   margin: 0;
   margin-bottom: var(--main-offset);
@@ -140,5 +152,26 @@ a {
 .custom-checkbox {
   @include custom-checkbox;
 
+  &__content {
+    padding-left: 35px;
+    font: 400 16px /140% var(--font-family);
+    color: var(--color-main);
+
+    &::before {
+      top: -3px;
+      border-color: var(--color-cameo);
+      border-radius: 4px;
+      width: 24px;
+      height: 24px;
+    }
+    &::after {
+      top: -3px;
+      width: 24px;
+      height: 24px;
+      background-image: url("../img/check.svg");
+      background-size: 15px 12px;
+
+    }
+  }
 
 }
