@@ -121,9 +121,9 @@ a {
   font: 400 16px /140% var(--font-family);
   transition: color .3s ease-in-out, background-color .3s ease-in-out ;
 
-    &--primary {
-      background-color: var(--color-accent);
-      color: var(--color-white);
+  &--primary {
+    background-color: var(--color-accent);
+    color: var(--color-white);
 
     &:hover {
       background-color: var(--color-accent-hover);
@@ -140,6 +140,19 @@ a {
       background-color: var(--color-main-hover);
     }
   }
+  &--thirdly {
+    background-color: transparent;
+    padding: 13px 45px;
+    color: var(--color-main);
+    border: 1px solid var(--color-main);
+
+    &:hover {
+      color: var(--color-white);
+      background-color: var(--color-main);
+    }
+  }
+
+
 }
 
 .title {
@@ -167,7 +180,7 @@ a {
         outline: 2px solid blue;
       }
     }
-    
+
 
     &::after {
       top: -1px;
