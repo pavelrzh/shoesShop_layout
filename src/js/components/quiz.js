@@ -275,3 +275,5 @@ window.quiz = new Quiz('.quiz-form .quiz-questions', quizData, {
 nextBtnText: "Следующий шаг",
 sendBtnText: "Отправить",
 });
+
+
