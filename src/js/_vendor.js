@@ -5,6 +5,7 @@ import './components/faq.js';
 import './components/map.js';
 import './components/products.js';
 import './vendor/clamp.min.js';
+import './vendor/graph-modal.min.js';
 // import './components/insta.js';
 
 
