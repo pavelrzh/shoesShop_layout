@@ -1,3 +1,5 @@
+import Swiper from '../vendor/swiper.min.js';
+
 const catalogList = document.querySelector('.catalog-list');
 const catalogMore = document.querySelector('.catalog__more');
 const prodModal = document.querySelector('[data-graph-target="prod-modal"] .graph-modal__content');
@@ -8,6 +10,11 @@ let dataLength = null;
 const normalPrice = (str) => {
   return String(str).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
 };
+
+const prodSlider = new Swiper('.modal-slider__container', {
+  slidesPerView: 1,
+  spaceBetween: 20
+});
 
 if(catalogList) {
   const loadProducts = (quantity = 6) => {
@@ -20,7 +27,7 @@ if(catalogList) {
       catalogList.innerHTML = '';
 
 
-      for(i = 0; i < dataLength; i++) {
+      for(let i = 0; i < dataLength; i++) {
         if(i < quantity) {
           let item = data[i];
           console.log(item);
@@ -59,11 +66,13 @@ if(catalogList) {
       const modal = new GraphModal({                      //открытие модалки
         isOpen: (modal) => {
           const openBtnId = modal.previousActiveElement.dataset.id;
+
           // t = (window.innerWidth - document.body.offsetWidth)+"px";
           // document.body.style.paddingRight = t;
-          console.log(openBtnId);
 
           loadModalData(openBtnId);
+
+          prodSlider.update();
         },
         isClose: () => {
           console.log('closed');
@@ -101,3 +110,5 @@ if(catalogList) {
     }
   });
 }
+
+
