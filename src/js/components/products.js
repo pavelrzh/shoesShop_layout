@@ -3,6 +3,12 @@ import Swiper from '../vendor/swiper.min.js';
 const catalogList = document.querySelector('.catalog-list');
 const catalogMore = document.querySelector('.catalog__more');
 const prodModal = document.querySelector('[data-graph-target="prod-modal"] .graph-modal__content');
+const prodModalSlider = prodModal.querySelector('.modal-slider .swiper-wrapper');
+const prodModalPreview = prodModal.querySelector('.modal-slider .modal-preview');
+const prodModalInfo = prodModal.querySelector('.modal-info__wrapper');
+const prodModalDescr = prodModal.querySelector('.modal-prod-descr');
+const prodModalChars = prodModal.querySelector('.prod-chars');
+const prodModalVideo = prodModal.querySelector('.prod-modal__video');
 
 let prodQuantity = 6;
 let dataLength = null;
@@ -83,16 +89,73 @@ if(catalogList) {
 
   loadProducts(prodQuantity);
 
-  const loadModalData = (id = 1) => {         //загрузка данных для модалки
+  const loadModalData = (id = 1) => {                  //загрузка данных для модалки
     fetch('../data/data.json')
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        // prodModal.innerHTML = '';
+        prodModalSlider.innerHTML = '';
+        prodModalPreview.innerHTML ='';
+        prodModalInfo.innerHTML = '';
+        prodModalDescr.innerHTML = '';
+        prodModalChars.innerHTML = '';
+        prodModalVideo.innerHTML = '';
+
+
+
         for(let dataItem of data) {
           if (dataItem.id == id) {
             console.log(dataItem);
+
+            const slides = dataItem.gallery.map(image => {
+              return `
+              <div class="swiper-slide">
+                <img src="${image}" alt="">
+              </div>
+              `;
+            });
+            const preview = dataItem.gallery.map((image, idx) => {
+              return `
+              <div class="modal-preview__item" data-index="${idx}">
+                <img src="${image}" alt="">
+              </div>
+              `;
+            });
+            const sizes = dataItem.sizes.map((size, idx) => {
+              return `
+                <li class="modal-sizes__item">
+                    <button class="btn-reset modal-sizes__btn">${size}</button>
+                </li>
+              `;
+            });
+
+
+          prodModalSlider.innerHTML = slides.join('');
+          prodModalPreview.innerHTML = preview.join('');
+          prodModalInfo.innerHTML = `
+
+          <h3 class="modal-info__title title">${dataItem.title}</h3>
+          <div class="modal-info__rate">
+            <img src="img/star.svg" alt="Рейтинг 5 из 5">
+            <img src="img/star.svg" alt="">
+            <img src="img/star.svg" alt="">
+            <img src="img/star.svg" alt="">
+            <img src="img/star.svg" alt="">
+          </div>
+          <div class="modal-info__sizes">
+            <span class="modal-info__subtitle">Выберите размер</span>
+            <ul class="list-reset modal-info__sizes-list modal-sizes">
+              ${sizes.join('')}
+            </ul>
+          </div>
+          <div class="modal-info__price">
+            <span class="modal-info__current-price">${dataItem.price} p</span>
+            <span class="modal-info__old-price">${dataItem.oldPrice ? dataItem.oldPrice + ' p': ''}</span>
+          </div>
+          `;
+
+
           }
         }
       })
