@@ -6,6 +6,7 @@ import './components/map.js';
 import './vendor/clamp.min.js';
 import './vendor/graph-modal.min.js';
 import './components/products.js';
-import './vendor/swiper.min.js';
+import './vendor/simplebar.min.js';
+import './components/cart.js';
 
 

@@ -73,9 +73,62 @@
       background-color: var(--color-main-hover);
     }
   }
-
-
 }
 
+.mini-product {
+  display: flex;
+  align-items: center;
+  padding: var(--second-offset);
+  padding-bottom: var(--small-offset);
 
+  &__image {
+    width: 100px;
+    height: 57px;
+    margin-right: var(--small-offset);
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+
+  &__content {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+  }
+
+  &__text {
+    margin-right: auto;
+    max-width: 268px;
+  }
+
+  &__title {
+    margin: 0;
+    margin-bottom: 14px;
+    font: var(--small-book);
+    line-height: 20px;
+    color: #4d4d4d;
+  }
+
+  &__price {
+    font: 700 20px /20px var(--font-family);
+    color: #4d4d4d;
+  }
+
+  &__delete {
+    width: 20px;
+    height: 20px;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  }
 
