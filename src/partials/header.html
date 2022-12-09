@@ -12,11 +12,11 @@
           <li class="nav__item"><a href="#" class="nav__link">Наша команда</a></li>
           <li class="nav__item"><a href="#" class="nav__link">Доставка и оплата</a></li>
           <li class="nav__item"><a href="#" class="nav__link">Контакты</a></li>
-          <li class="nav__item"><a href="#" class="nav__link">Корзина</a></li>
+          <li class="nav__item"><a href="#" class="nav__link cart__btns">Корзина</a></li>
         </ul>
       </nav>
       <div class="cart header__cart">
-        <button class="btn-reset cart__btn cart__btns" data-toggle="modal">
+        <button class="btn-reset cart__btn cart__btns">
           <svg>
             <use xlink:href="img/sprite.svg#cart"></use>
           </svg>
@@ -25,7 +25,7 @@
         <div class="mini-cart">
           <div class="mini-cart__top" data-simplebar>
             <ul class="mini-cart__list list-reset">
-              <li class="mini-cart__item">
+              <!-- <li class="mini-cart__item">
                 <article class="mini-cart__product mini-product">
                   <div class="mini-product__image">
                     <img src="img/product-image.jpg" alt="">
@@ -96,15 +96,15 @@
                     </button>
                   </div>
                 </article>
-              </li>
+              </li> -->
             </ul>
           </div>
           <div class="mini-cart__bottom">
             <div class="mini-cart__resume">
               <span class="mini-cart__txt">Итого:</span>
-              <span class="mini-cart__sum">25 789 р</span>
+              <span class="mini-cart__sum">0 р</span>
             </div>
-            <button class="btn-reset btn btn--primary mini-cart__btn">Перейти в корзину</button>
+            <button class="btn-reset btn btn--primary mini-cart__btn" data-graph-path="cart-modal">Перейти в корзину</button>
           </div>
         </div>
       </div>

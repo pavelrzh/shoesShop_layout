@@ -49,7 +49,7 @@ if(catalogList) {
                         <use xlink:href="img/sprite.svg#eye"></use>
                       </svg>
                     </button>
-                    <button class="btn-reset product__btn" aria-label="Добавить товар в корзину">
+                    <button class="btn-reset product__btn" data-id ="${item.id}" aria-label="Добавить товар в корзину">
                       <svg>
                         <use xlink:href="img/sprite.svg#cart"></use>
                       </svg>
@@ -69,22 +69,19 @@ if(catalogList) {
         productTitle.forEach(el => {
           $clamp(el, {clamp:'22px'});
         });
-      const modal = new GraphModal({                      //открытие модалки
+
+      cartLogic();
+
+      const modal = new GraphModal({                                      //открытие модалки
         isOpen: (modal) => {
-          const openBtnId = modal.previousActiveElement.dataset.id;
+          if (modal.modalContainer.classList.contains('prod-modal')) {
+            const openBtnId = modal.previousActiveElement.dataset.id;
 
-          // t = (window.innerWidth - document.body.offsetWidth)+"px";
-          // document.body.style.paddingRight = t;
+            loadModalData(openBtnId);
 
-
-          loadModalData(openBtnId);
-
-          prodSlider.update();
-
+            prodSlider.update();
+          }
         },
-        isClose: () => {
-          console.log('closed');
-        }
       });
     });
   };
@@ -103,8 +100,6 @@ if(catalogList) {
         prodModalDescr.textContent = '';
         prodModalChars.innerHTML = '';
         prodModalVideo.innerHTML = '';
-
-
 
         for(let dataItem of data) {
           if (dataItem.id == id) {
@@ -212,4 +207,114 @@ if(catalogList) {
   });
 }
 
+/// Корзина
+
+let price = 0;
+const miniCart = document.querySelector('.mini-cart');
+const miniCartList = document.querySelector('.mini-cart__list');
+const fullPrice = document.querySelector('.mini-cart__sum');
+const cartCount = document.querySelector('.cart__count');
+
+const priceWithoutSpaces = (str) => {
+  return str.replace(/\s/g, '');
+};
+
+
+const plusFullPrice = (currentPrice) => {
+  return price += currentPrice;
+};
+
+const minusFullPrice = (currentPrice) => {
+  return price -= currentPrice;
+};
+
+const printFullPrice = () => {
+  fullPrice.textContent = `${normalPrice(price)} р`;
+};
+
+const printQuantity = (num) => {
+  cartCount.textContent = num;
+}
+
+const loadCartData = (id = 1) => {                  //загрузка данных для корзины
+  fetch('../data/data.json')
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      for(let dataItem of data) {
+        if (dataItem.id == id) {
+          miniCartList.insertAdjacentHTML('afterbegin', `
+
+          <li class="mini-cart__item" data-id="${dataItem.id}">
+          <article class="mini-cart__product mini-product">
+            <div class="mini-product__image">
+              <img src="${dataItem.mainImage}" alt="${dataItem.title}">
+            </div>
+            <div class="mini-product__content">
+              <div class="mini-product__text">
+                <h3 class="mini-product__title">${dataItem.title}</h3>
+                <span class="mini-product__price">${normalPrice(dataItem.price)} р</span>
+              </div>
+              <button class="btn-reset mini-product__delete" aria-lebel="Удалить товар">
+                <svg>
+                  <use xlink:href="img/sprite.svg#trash"></use>
+                </svg>
+              </button>
+            </div>
+          </article>
+        </li>
+
+          `);
+          return dataItem;
+        }
+      }
+    })
+    .then((item) => {
+      plusFullPrice(item.price);
+      printFullPrice();
+
+      let num = document.querySelectorAll('.mini-cart__item').length;
+      if (num > 0) {
+        cartCount.classList.add('cart__count--visible');
+      }
+      printQuantity(num);
+    })
+
+};
+
+const cartLogic = () => {
+
+  const productBtn = document.querySelectorAll('.product__btn');
+
+  productBtn.forEach(el => {
+    el.addEventListener('click', (e) => {
+      const id = e.currentTarget.dataset.id;
+      loadCartData(id);
+
+      e.currentTarget.classList.add('product__btn--disabled');
+    })
+  });
+  miniCartList.addEventListener('click', (e) => {                        /// Удаление из корзины
+    if (e.target.classList.contains('mini-product__delete')) {
+      const target = e.target;
+      const parent = target.closest('.mini-cart__item');
+      const price = parseInt(priceWithoutSpaces(parent.querySelector('.mini-product__price').textContent));
+
+      parent.remove();
+
+      minusFullPrice(price);
+      printFullPrice();
+
+      let num = document.querySelectorAll('.mini-cart__item').length;
+      if (num == 0) {
+        cartCount.classList.remove('cart__count--visible');
+        miniCart.classList.remove('mini-cart--visible');
+      }
+      printQuantity(num);
+    }
+  });
+
+
+};
 
