@@ -3,12 +3,15 @@ import Swiper from '../vendor/swiper.min.js';
 const catalogList = document.querySelector('.catalog-list');
 const catalogMore = document.querySelector('.catalog__more');
 const prodModal = document.querySelector('[data-graph-target="prod-modal"] .graph-modal__content');
+const opModal = document.querySelector('[data-graph-target="cart-modal"] .graph-modal__content');
 const prodModalSlider = prodModal.querySelector('.modal-slider .swiper-wrapper');
 const prodModalPreview = prodModal.querySelector('.modal-slider .modal-preview');
 const prodModalInfo = prodModal.querySelector('.modal-info__wrapper');
 const prodModalDescr = prodModal.querySelector('.modal-prod-descr');
 const prodModalChars = prodModal.querySelector('.prod-chars');
 const prodModalVideo = prodModal.querySelector('.prod-modal__video');
+
+let modal = null;
 
 let prodQuantity = 6;
 let dataLength = null;
@@ -49,7 +52,7 @@ if(catalogList) {
                         <use xlink:href="img/sprite.svg#eye"></use>
                       </svg>
                     </button>
-                    <button class="btn-reset product__btn" data-id ="${item.id}" aria-label="Добавить товар в корзину">
+                    <button class="btn-reset product__btn product__btn--cart" data-id ="${item.id}" aria-label="Добавить товар в корзину">
                       <svg>
                         <use xlink:href="img/sprite.svg#cart"></use>
                       </svg>
@@ -72,7 +75,7 @@ if(catalogList) {
 
       cartLogic();
 
-      const modal = new GraphModal({                                      //открытие модалки
+      modal = new GraphModal({                                      //открытие модалки
         isOpen: (modal) => {
           if (modal.modalContainer.classList.contains('prod-modal')) {
             const openBtnId = modal.previousActiveElement.dataset.id;
@@ -254,9 +257,9 @@ const loadCartData = (id = 1) => {                  //загрузка данн�
             <div class="mini-product__content">
               <div class="mini-product__text">
                 <h3 class="mini-product__title">${dataItem.title}</h3>
-                <span class="mini-product__price">${normalPrice(dataItem.price)} р</span>
+                <span class="mini-product__price" data-id="${dataItem.id}">${normalPrice(dataItem.price)} р</span>
               </div>
-              <button class="btn-reset mini-product__delete" aria-lebel="Удалить товар">
+              <button class="btn-reset mini-product__delete" aria-lebel="Удалить товар"> Удалить
                 <svg>
                   <use xlink:href="img/sprite.svg#trash"></use>
                 </svg>
@@ -274,7 +277,7 @@ const loadCartData = (id = 1) => {                  //загрузка данн�
       plusFullPrice(item.price);
       printFullPrice();
 
-      let num = document.querySelectorAll('.mini-cart__item').length;
+      let num = document.querySelectorAll('.mini-cart__list .mini-cart__item').length;
       if (num > 0) {
         cartCount.classList.add('cart__count--visible');
       }
@@ -285,7 +288,7 @@ const loadCartData = (id = 1) => {                  //загрузка данн�
 
 const cartLogic = () => {
 
-  const productBtn = document.querySelectorAll('.product__btn');
+  const productBtn = document.querySelectorAll('.product__btn--cart');
 
   productBtn.forEach(el => {
     el.addEventListener('click', (e) => {
@@ -295,18 +298,24 @@ const cartLogic = () => {
       e.currentTarget.classList.add('product__btn--disabled');
     })
   });
+
+
   miniCartList.addEventListener('click', (e) => {                        /// Удаление из корзины
     if (e.target.classList.contains('mini-product__delete')) {
       const target = e.target;
       const parent = target.closest('.mini-cart__item');
+      const id = parent.dataset.id;
       const price = parseInt(priceWithoutSpaces(parent.querySelector('.mini-product__price').textContent));
 
-      parent.remove();
+      document.querySelector(`.product__btn--cart[data-id="${id}"]`).classList.remove('product__btn--disabled');
 
+
+      console.log(price)
       minusFullPrice(price);
       printFullPrice();
+      parent.remove();
 
-      let num = document.querySelectorAll('.mini-cart__item').length;
+      let num = document.querySelectorAll('.mini-cart__list .mini-cart__item').length;
       if (num == 0) {
         cartCount.classList.remove('cart__count--visible');
         miniCart.classList.remove('mini-cart--visible');
@@ -317,4 +326,63 @@ const cartLogic = () => {
 
 
 };
+// Оформление в корзине
 
+const openOrderModal = document.querySelector('.mini-cart__btn');
+const orderModalList = document.querySelector('.cart-modal-order__list');
+const orderModalQuantity = document.querySelector('.cart-modal-order__quantity span');
+const orderModalSumm = document.querySelector('.cart-modal-order__summ span');
+const orderModalShow = document.querySelector('.cart-modal-order__show');
+const orderModal = document.querySelector('.graph-modal__container');
+
+
+openOrderModal.addEventListener('click', () => {
+  const productsHtml = miniCartList.innerHTML;
+  orderModalList.innerHTML = productsHtml;
+
+  orderModalQuantity.textContent = `${document.querySelectorAll('.mini-cart__list .mini-cart__item').length} шт`;
+  orderModalSumm.textContent = fullPrice.textContent;
+});
+
+orderModalShow.addEventListener('click', () => {
+  if (orderModalList.classList.contains('cart-modal-order__list--visible')) {
+    orderModalList.classList.remove('cart-modal-order__list--visible');
+    orderModalShow.classList.remove('cart-modal-order__show--active');
+  } else {
+    orderModalList.classList.add('cart-modal-order__list--visible');
+    orderModalShow.classList.add('cart-modal-order__show--active');
+  }
+
+});
+
+
+orderModalList.addEventListener('click', (e) => {                        /// Удаление из оформления
+  if (e.target.classList.contains('mini-product__delete')) {
+    const target = e.target;
+    const parent = target.closest('.mini-cart__item');
+    const id = parent.dataset.id;
+
+    const parentCart = document.querySelector(`.mini-cart__item[data-id="${id}"]`);
+
+    const price = parseInt(priceWithoutSpaces(parent.querySelector('.mini-product__price').textContent));
+
+    document.querySelector(`.product__btn--cart[data-id="${id}"]`).classList.remove('product__btn--disabled');
+
+    minusFullPrice(price);
+    printFullPrice();
+    parent.remove();
+    parentCart.remove();
+
+    orderModalQuantity.textContent = `${document.querySelectorAll('.cart-modal-order__list .mini-cart__item').length} шт`;
+    orderModalSumm.textContent = fullPrice.textContent;
+
+
+    let num = document.querySelectorAll('.cart-modal-order__list .mini-cart__item').length;
+    if (num == 0) {
+      cartCount.classList.remove('cart__count--visible');
+      miniCart.classList.remove('mini-cart--visible');
+      // modal.close();
+    }
+    printQuantity(num);
+  }
+});

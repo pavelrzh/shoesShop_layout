@@ -58,7 +58,7 @@
     }
   }
   &__list {
-    // display: none;
+    display: none;
 
     &--visible {
       display: block;
@@ -73,7 +73,7 @@
     margin-bottom: var(--second-offset);
   }
 
-  &__item {
+  .mini-cart__item {
     &:not(:last-child) {
       margin-bottom: 14px;
     }

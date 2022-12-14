@@ -127,6 +127,7 @@
   &__delete {
     width: 20px;
     height: 20px;
+    font-size: 0;
 
     svg {
       display: block;
@@ -138,11 +139,13 @@
   }
   }
 
-.cart-modal-product {
+.cart-modal {
+  .mini-product {
 
     position:relative;
     display: flex;
     align-items: center;
+    padding: 0;
 
 
     &__image {
@@ -185,9 +188,16 @@
     }
 
     &__delete {
+      width: auto;
+      height: auto;
       font: var(--small-book);
       color: var(--color-gray);
 
+      svg {
+        display: none;
+      }
+
     }
   }
+}
 
