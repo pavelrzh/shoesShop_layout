@@ -333,7 +333,6 @@ const orderModalList = document.querySelector('.cart-modal-order__list');
 const orderModalQuantity = document.querySelector('.cart-modal-order__quantity span');
 const orderModalSumm = document.querySelector('.cart-modal-order__summ span');
 const orderModalShow = document.querySelector('.cart-modal-order__show');
-const orderModal = document.querySelector('.graph-modal__container');
 
 
 openOrderModal.addEventListener('click', () => {
@@ -370,6 +369,7 @@ orderModalList.addEventListener('click', (e) => {                        /// Ð£Ð
 
     minusFullPrice(price);
     printFullPrice();
+
     parent.remove();
     parentCart.remove();
 
