@@ -8,5 +8,6 @@ import './vendor/graph-modal.min.js';
 import './components/products.js';
 import './vendor/simplebar.min.js';
 import './components/cart.js';
+import './components/focus.js';
 
 

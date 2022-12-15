@@ -9,6 +9,7 @@
     height: 20px;
     font: var(--small-book);
     color: var(--color-white);
+    outline: none;
 
     svg {
       display: block;
@@ -17,6 +18,27 @@
       object-fit: cover;
       fill: var(--color-white);
       pointer-events: none;
+      transition: fill .3s ease-in-out;
+    }
+
+    &:focus {
+      svg {
+        fill: var(--color-accent);
+      }
+    }
+
+    @include for-desktop {
+      &:hover {
+        svg {
+          fill: var(--color-accent);
+        }
+      }
+    }
+
+    &:active {
+      svg {
+        fill: var(--color-accent-hover);
+      }
     }
   }
   &__count {

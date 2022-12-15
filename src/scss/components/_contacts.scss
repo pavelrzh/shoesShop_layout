@@ -1,3 +1,5 @@
+@import '../mixins';
+
 .contacts {
   padding: var(--big-offset) 0;
   background-color: #f3f6f6;
@@ -39,6 +41,23 @@
     margin-bottom: var(--small-offset);
     font: 400 30px /140% var(--font-family);
     color: var(--color-main);
+    outline: none;
+    transition: color .3s ease-in-out;
+
+    &:focus {
+      color: var(--color-accent-hover);
+    }
+
+    @include for-desktop {
+      &:hover {
+        color: var(--color-accent-hover);
+      }
+    }
+
+    &:active {
+      color: var(--color-btn-active);
+    }
+
   }
 
   &__text {

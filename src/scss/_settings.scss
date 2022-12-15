@@ -80,7 +80,9 @@ a {
   padding: 0;
   background-color: transparent;
   cursor: pointer;
-  font: 400 16px /140% var(--font-family);;
+  font: 400 16px /140% var(--font-family);
+  outline-offset: 3px;
+  outline-color: var(--color-jumbo);
 }
 .container {
   margin: 0 auto;
@@ -120,14 +122,22 @@ a {
   padding: 22px 47px;
   font: 400 16px /140% var(--font-family);
   transition: color .3s ease-in-out, background-color .3s ease-in-out ;
+  outline: none;
 
   &--primary {
     background-color: var(--color-accent);
     color: var(--color-white);
+    outline: none;
 
-    &:hover {
-      background-color: var(--color-accent-hover);
-    }
+     @include for-desktop {
+       &:hover {
+        background-color: var(--color-accent-hover);
+       }
+     }
+
+     &:active {
+      background-color: var(--color-btn-active);
+     }
   }
 
   &--secondary {
@@ -135,10 +145,18 @@ a {
     background-color: var(--color-main);
     color: var(--color-white);
     width: 100%;
+    outline: none;
 
-    &:hover {
-      background-color: var(--color-main-hover);
+    @include for-desktop {
+      &:hover {
+        background-color: var(--color-main-hover);
+      }
     }
+
+    &:active {
+      background-color: var(--color-btn-active);
+     }
+
   }
   &--thirdly {
     background-color: transparent;
@@ -146,13 +164,29 @@ a {
     color: var(--color-main);
     border: 1px solid var(--color-main);
 
-    &:hover {
-      color: var(--color-white);
-      background-color: var(--color-main);
+    @include for-desktop {
+      &:hover {
+        color: var(--color-white);
+        background-color: var(--color-main);
+      }
     }
+    &:active {
+      background-color: var(--color-btn-active);
+     }
   }
+}
 
+.btn--primary.focus-visible:focus {
+  background-color: var(--color-accent-hover);
+}
 
+.btn--secondary.focus-visible:focus {
+  background-color: var(--color-main-hover);
+}
+
+.btn--thirdly.focus-visible:focus {
+  color: var(--color-white);
+  background-color: var(--color-main);
 }
 
 .title {
@@ -176,9 +210,6 @@ a {
       border-radius: 4px;
       width: 24px;
       height: 24px;
-      &:focus {
-        outline: 2px solid blue;
-      }
     }
 
 
@@ -191,11 +222,14 @@ a {
 
     }
   }
+
+  .custom-checkbox__field:focus + .custom-checkbox__content::before {
+    outline: 2px solid var(--color-accent-hover);
+    outline-offset: 2px;
+
+  }
 }
 
-.custom-checkbox__field:focus + .custom-checkbox__content::before {
-  outline: none;
-}
 
 .tooltip {
   position: relative;
@@ -272,6 +306,8 @@ a {
   background-color: var(--color-white);
   color: var(--color-main);
   font: 400 16px /140% var(--font-family);
+  outline-offset: 3px;
+  outline-color: var(--color-jumbo);
 
   &::placeholder {
     color: var(--color-gray);

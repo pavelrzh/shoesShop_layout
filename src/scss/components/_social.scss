@@ -1,3 +1,5 @@
+@import '../mixins';
+
 .social {
   &__list {
     display: flex;
@@ -15,12 +17,28 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    outline: none;
+    transition: opacity .3s ease-in-out;
 
     &--vk {
       background-image: url("../img/vk.svg");
     }
     &--insta {
       background-image: url("../img/insta.svg");
+    }
+
+    &:focus {
+      opacity: 0.7;
+    }
+
+    @include for-desktop {
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+    &:active {
+      opacity: 0.9;
     }
   }
 }

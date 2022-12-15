@@ -1,9 +1,30 @@
+@import '../mixins';
+
 .catalog {
   padding: var(--big-offset) 0;
 
   &__left {
     grid-column: 3 span;
 
+  }
+
+  &__reset {
+    transition: color .3s ease-in-out;
+    outline: none;
+
+    &:focus {
+      color: var(--color-accent);
+    }
+
+    @include for-desktop {
+      &:hover {
+        color: var(--color-accent);
+      }
+    }
+
+    &:active {
+      color: var(--color-accent-hover);
+    }
   }
 
   &__grid {
@@ -93,6 +114,7 @@
     text-align: center;
     border: 1px solid var(--color-gray);
     background-color: transparent;
+    outline: none;
 
     &:first-child {
       border-right: none;
@@ -133,18 +155,28 @@
     box-shadow: none;
     background-color: var(--color-main);
     cursor: pointer;
+    // outline: none;
   }
   .noUi-handle::after,
   .noUi-handle::before {
     display: none;
   }
+  .noUi-handle:focus {
+    outline: none;
+    background-color: var(--color-btn-active);
+  }
+  .noUi-handle:active {
+    background-color: var(--color-btn-active);
+  }
   .noUi-handle-lower {
     right: -2px;
   }
   .noUi-touch-area {
-    padding: 5px;
+    padding: 12px;
+
   }
+}
 
-
-
+.catalog-price__input.focus-visible {
+  background-color: var(--color-cameo);
 }
