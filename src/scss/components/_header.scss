@@ -34,5 +34,16 @@
     justify-content: flex-end;
     align-items: center;
     grid-column: 10 span;
+
+    @include mobile {
+      grid-column: 2 span;
+    }
+  }
+
+  &__nav {
+
+    @include tablet {
+      display: none;
+    }
   }
 }

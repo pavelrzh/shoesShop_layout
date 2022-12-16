@@ -1,9 +1,19 @@
 .faq {
-  padding: var(--big-offset) 0;
+  padding: var(--big-offset);
 
   &__list {
     margin: 0 auto;
     max-width: 880px;
+  }
+
+  @include mobile {
+    padding: 40px 0;
+  }
+
+  &__title {
+    @include mobile {
+      font: 700 22px /140% var(--font-family)
+    }
   }
 }
 
@@ -21,6 +31,11 @@
     background-size: cover;
     background-repeat: no-repeat;
     transition: transform 0.3s ease-out;
+
+    @include mobile {
+      width: 18px;
+      height: 18px;
+    }
   }
 
   &__control {
@@ -34,11 +49,12 @@
     color: var(--color-main);
     background-color: transparent;
     cursor: pointer;
+  }
 
-    &:focus {
-      color: var(--color-accent-hover);
+  &__title {
+    @include mobile {
+      font: 400 16px /140% var(--font-family)
     }
-
   }
 
   &__content {

@@ -27,6 +27,10 @@
     line-height: 200px;
     color: rgba(255, 255, 255, 0.12);
     transform: translate(-50%, -50%);
+
+    @include tablet {
+      display: none;
+    }
   }
 
   &__title {
@@ -36,6 +40,14 @@
     font: 400 36px /140% var(--font-family);
     color: var(--color-white);
     margin-bottom: var(--second-offset);
+
+    @include small-tablet {
+      margin-top: 0;
+      max-width: 100%;
+    }
+    @include mobile {
+      font: 400 24px /140% var(--font-family);
+    }
   }
 
   &__descr {
@@ -44,5 +56,18 @@
       max-width: calc(50% - 100px);
       font: 400 16px /140% var(--font-family);
       color: var(--color-white);
+
+      @include small-tablet {
+        margin-top: 0;
+        max-width: 100%;
+      }
+      @include mobile {
+        font: 400 16px /140% var(--font-family);
+      }
+  }
+
+  @include small-tablet {
+    padding: 50px 0;
+    height: auto;
   }
 }

@@ -1,5 +1,5 @@
-// если вы хотите использовать sass-переменные - удалите root
-// colors
+@import './mixins';
+
 :root {
   // base
   --content-width: 1180px;
@@ -37,6 +37,14 @@
   --big-offset: 60px;
   --small-offset: 10px
 
+}
 
-
+@include mobile {
+  :root {
+    --grid-gap: 10px;
+    --main-offset: 20px;
+    --second-offset: 14px;
+    --big-offset: 30px;
+    --small-offset: 8px
+  }
 }
