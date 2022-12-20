@@ -1,5 +1,13 @@
 @import '../mixins';
 
+.modal {
+  @include tablet {
+    &::before {
+      display: none;
+    }
+  }
+}
+
 .prod-modal {
   padding: var(--main-offset);
   border-radius: 4px;
@@ -9,6 +17,10 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: var(--main-offset);
+
+    @include small-tablet {
+      flex-direction: column;
+    }
    }
 
    &__video {
@@ -22,6 +34,11 @@
       height: 100%;
       object-fit: cover;
     }
+   }
+
+   @include tablet {
+    width: 100%;
+    margin: 0;
    }
 }
 
@@ -41,6 +58,12 @@
       object-fit: cover;
     }
   }
+
+  @include small-tablet {
+    margin-right: 0;
+    margin-bottom: 30px;
+    width: 100%;
+  }
 }
 
 .modal-info {
@@ -56,10 +79,22 @@
     margin-bottom: var(--main-offset);
     font: 400 16px /140% var(--font-family);
     color: var(--color-gray);
+
+    @include mobile {
+      flex-direction: column;
+    }
   }
 
   &__vendor {
     margin-right: var(--main-offset);
+
+    @include tablet {
+      margin-right: var(--small-offset);
+    }
+    @include mobile {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
   }
 
   &__quantity {
@@ -85,9 +120,7 @@
     margin-bottom: var(--second-offset);
     font: 400 16px /140% var(--font-family);
     color: var(--color-main);
-
   }
-
 
   &__price {
     display: flex;
@@ -107,7 +140,17 @@
   &__order {
     margin-top: auto;
     width: 100%;
+
+    @include small-tablet {
+      margin-top: 30px;
+    }
   }
+
+  @include small-tablet {
+    margin: 0;
+    width: 100%;
+  }
+
 }
 
 .modal-sizes {
@@ -195,6 +238,10 @@
     &:first-child {
       margin-right: var(--second-offset);
     }
+
+    @include small-tablet {
+      width: 100%;
+    }
   }
 
   &__title {
@@ -209,8 +256,21 @@
     max-width: 430px;
     font: 400 16px /140% var(--font-family);
     color: var(--color-main);
+
+    @include small-tablet {
+      margin-bottom: 30px;
+    }
+  }
+
+  @include small-tablet {
+    display: block;
   }
 }
 .graph-modal__close {
   display: none;
+
+  @include small-tablet {
+    display: block;
+    z-index: 100;
+  }
 }

@@ -5,6 +5,11 @@
 
   .graph-modal__close {
     display: none;
+
+    @include small-tablet {
+      display: block;
+      z-index: 100;
+    }
   }
 
   &__top {
@@ -12,12 +17,20 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: var(--main-offset);
+
+    @include small-tablet {
+      display: block;
+    }
   }
 
   &__title {
     margin: 0;
     font: 700 20px /20px var(--font-family);
     color: var(--color-main);
+
+    @include mobile {
+      margin-bottom: 10px;
+    }
   }
 
   &__order-number {
@@ -39,6 +52,11 @@
     margin-top: var(--second-offset);
   }
 
+  @include small-tablet {
+    width: calc(100% - 30px);
+    max-width: 570px;
+  }
+
 }
 
 .cart-modal-order {
@@ -55,6 +73,10 @@
     span {
       font-weight: 700;
       color: var(--color-main);
+    }
+
+    @include mobile {
+      font-size: 14px;
     }
   }
   &__list {

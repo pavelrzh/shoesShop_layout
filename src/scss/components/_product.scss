@@ -31,6 +31,9 @@
       opacity: 1;
     }
 
+    @include mobile {
+      opacity: 0.7;
+    }
 
   }
 
@@ -62,6 +65,7 @@
   }
 
   &__btn {
+    outline: none;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -79,10 +83,18 @@
       fill: var(--color-white);
     }
 
+    &:focus {
+      background-color: var(--color-main-hover);
+    }
+
     @include for-desktop {
       &:hover {
         background-color: var(--color-main-hover);
       }
+    }
+
+    &:active {
+      background-color: var(--color-accent-hover);
     }
 
     &--disabled {
@@ -109,8 +121,12 @@
       height: 100%;
       object-fit: cover;
     }
-  }
 
+    @include mobile {
+      width: 60px;
+      height: 50px;
+    }
+  }
 
   &__content {
     display: flex;
@@ -129,6 +145,7 @@
     font: var(--small-book);
     line-height: 20px;
     color: #4d4d4d;
+
   }
 
   &__price {
@@ -137,6 +154,7 @@
   }
 
   &__delete {
+    flex-shrink: 0;
     width: 20px;
     height: 20px;
     font-size: 0;
@@ -149,11 +167,11 @@
       pointer-events: none;
     }
   }
-  }
+
+ }
 
 .cart-modal {
   .mini-product {
-
     position:relative;
     display: flex;
     align-items: center;
@@ -179,6 +197,10 @@
       display: flex;
       flex-grow: 1;
       align-items: center;
+
+      @include mobile {
+        align-items: flex-end;
+      }
     }
 
     &__text {
@@ -192,6 +214,7 @@
       font: var(--small-book);
       line-height: 20px;
       color: #4d4d4d;
+
     }
 
     &__price {
@@ -208,7 +231,10 @@
       svg {
         display: none;
       }
+    }
 
+    @include mobile {
+      display: block;
     }
   }
 }

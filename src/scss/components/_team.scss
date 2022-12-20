@@ -21,6 +21,10 @@
     position: relative;
     z-index: 10;
     gap: var(--main-offset) var(--second-offset);
+
+    @include mobile {
+        grid-template-columns: repeat(4, 1fr);
+      }
   }
 
   &__item {
@@ -31,6 +35,10 @@
     overflow: hidden;
     margin-bottom: var(--second-offset);
     border-radius: 5px;
+
+    @include small-tablet {
+      width: 100%;
+    }
   }
 
   &__subtitle {

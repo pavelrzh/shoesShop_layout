@@ -3,9 +3,25 @@
   &__list {
     display: flex;
     align-items: center;
+
+    @include tablet {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  &__list-footer {
+    display: flex;
+    align-items: center;
+
+    @include tablet {
+      align-items: flex-start;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
   }
 
-  &__link {
+  &__link,
+  &__link-footer {
     position: relative;
     outline: none;
     font: var(--small-book);
@@ -30,6 +46,10 @@
         transform: scaleX(1);
       }
     }
+    &:active {
+      opacity: 0.8;
+      transition: opacity .3s ease-in-out;
+    }
 
     @include for-desktop {
       &:hover {
@@ -38,17 +58,28 @@
         }
       }
     }
-
-    &:active {
-      opacity: 0.8;
-      transition: opacity .3s ease-in-out;
+    @include tablet {
+      font-size: 22px;
+      margin-bottom: 100px;
     }
+  }
 
+  &__link-footer {
+    @include tablet {
+      font-size: 18px;
+    }
+    @include mobile {
+      font-size: 14px;
+    }
   }
 
   &__item {
     &:not(:last-child) {
       margin-right: var(--main-offset);
+    }
+
+    @include tablet {
+      margin-bottom: 14px;
     }
   }
 }

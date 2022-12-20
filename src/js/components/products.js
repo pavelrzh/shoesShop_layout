@@ -3,7 +3,6 @@ import Swiper from '../vendor/swiper.min.js';
 const catalogList = document.querySelector('.catalog-list');
 const catalogMore = document.querySelector('.catalog__more');
 const prodModal = document.querySelector('[data-graph-target="prod-modal"] .graph-modal__content');
-const opModal = document.querySelector('[data-graph-target="cart-modal"] .graph-modal__content');
 const prodModalSlider = prodModal.querySelector('.modal-slider .swiper-wrapper');
 const prodModalPreview = prodModal.querySelector('.modal-slider .modal-preview');
 const prodModalInfo = prodModal.querySelector('.modal-info__wrapper');
@@ -71,6 +70,20 @@ if(catalogList) {
       const productTitle = document.querySelectorAll('.product__title');  //обрезка названия >22px
         productTitle.forEach(el => {
           $clamp(el, {clamp:'22px'});
+        });
+
+        const productsBtns = document.querySelectorAll('.product__btn');
+
+        productsBtns.forEach(el => {
+          el.addEventListener('focus', (e) => {
+            let parent = e.currentTarget.closest('.product__btns');
+            parent.classList.add('product__btns--active');
+          }, true);
+
+          el.addEventListener('blur', (e) => {
+            let parent = e.currentTarget.closest('.product__btns');
+            parent.classList.remove('product__btns--active');
+          }, true);
         });
 
       cartLogic();
@@ -295,6 +308,10 @@ const cartLogic = () => {
       const id = e.currentTarget.dataset.id;
       loadCartData(id);
 
+      document.querySelectorAll('.cart__btns').forEach(e => {                       //запрет клика по пустой корзине
+        e.classList.remove('cart__btn--inactive');
+      })
+
       e.currentTarget.classList.add('product__btn--disabled');
     })
   });
@@ -310,7 +327,6 @@ const cartLogic = () => {
       document.querySelector(`.product__btn--cart[data-id="${id}"]`).classList.remove('product__btn--disabled');
 
 
-      console.log(price)
       minusFullPrice(price);
       printFullPrice();
       parent.remove();
@@ -319,6 +335,10 @@ const cartLogic = () => {
       if (num == 0) {
         cartCount.classList.remove('cart__count--visible');
         miniCart.classList.remove('mini-cart--visible');
+
+        document.querySelectorAll('.cart__btns').forEach(e => {                //разрешение клика по НЕ пустой корзине
+          e.classList.add('cart__btn--inactive');
+        })
       }
       printQuantity(num);
     }
@@ -355,14 +375,12 @@ orderModalShow.addEventListener('click', () => {
 });
 
 
-orderModalList.addEventListener('click', (e) => {                        /// Удаление из оформления
+orderModalList.addEventListener('click', (e) => {                        /// Удаление из модалки корзины
   if (e.target.classList.contains('mini-product__delete')) {
     const target = e.target;
     const parent = target.closest('.mini-cart__item');
     const id = parent.dataset.id;
-
     const parentCart = document.querySelector(`.mini-cart__item[data-id="${id}"]`);
-
     const price = parseInt(priceWithoutSpaces(parent.querySelector('.mini-product__price').textContent));
 
     document.querySelector(`.product__btn--cart[data-id="${id}"]`).classList.remove('product__btn--disabled');
@@ -381,7 +399,11 @@ orderModalList.addEventListener('click', (e) => {                        /// У�
     if (num == 0) {
       cartCount.classList.remove('cart__count--visible');
       miniCart.classList.remove('mini-cart--visible');
-      // modal.close();
+      modal.close();
+
+      document.querySelectorAll('.cart__btns').forEach(e => {                //разрешение клика по НЕ пустой корзине
+        e.classList.add('cart__btn--inactive');
+      })
     }
     printQuantity(num);
   }

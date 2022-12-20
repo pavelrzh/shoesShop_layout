@@ -10,6 +10,7 @@
     font: var(--small-book);
     color: var(--color-white);
     outline: none;
+    z-index: 1000;
 
     svg {
       display: block;
@@ -20,6 +21,11 @@
       pointer-events: none;
       transition: fill .3s ease-in-out;
     }
+
+    &--inactive {
+        pointer-events: none;
+    }
+
 
     &:focus {
       svg {
@@ -40,6 +46,7 @@
         fill: var(--color-accent-hover);
       }
     }
+
   }
   &__count {
     position: absolute;
@@ -76,6 +83,7 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity .3s ease-in-out, visibility .3s ease-in-out;
+  z-index: 1005;
 
   &__top {
     max-height: 323px;
@@ -98,6 +106,12 @@
     }
   }
 
+  &__resume {
+    @include mobile {
+      margin-bottom: 20px;
+    }
+  }
+
   &__bottom {
     display: flex;
     align-items: center;
@@ -105,6 +119,10 @@
     padding: var(--second-offset);
     box-shadow: 0 -4px 10px rgba(0, 13, 84, 0.1);
     background-color: var(--color-white);
+
+    @include mobile {
+      flex-wrap: wrap;
+    }
   }
 
   &__txt {
@@ -123,12 +141,21 @@
   &__btn {
     padding-top: 14px;
     padding-bottom: 14px;
+
+    @include mobile {
+      width: 100%;
+    }
   }
+
 
 
   &--visible {
     opacity: 1;
     visibility: visible;
-    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    transition: opacity 0.1s ease-in-out, visibility 0.1s ease-in-out;
+  }
+
+  @include mobile {
+    width: calc(100vw - 30px);
   }
 }

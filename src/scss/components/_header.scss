@@ -6,7 +6,6 @@
   z-index: 100;
   background-color: var(--color-eastbay);
 
-
   &__container {
     --padddings: 15px;
     position: relative;
@@ -38,12 +37,55 @@
     @include mobile {
       grid-column: 2 span;
     }
+
+    @include tablet {
+      align-items: center;
+      align-items: flex-start;
+      grid-column: 10 span;
+    }
   }
 
   &__nav {
-
     @include tablet {
-      display: none;
+      position: absolute;
+      width: 400px;
+      height: auto;
+      padding: 30px;
+      right: -100vw;
+      top: 0;
+      background-color: #5a53ab;
+      z-index: 1000;
+      transition: right .3s ease-in-out;
+
+      &--active {
+        right: 0;
+        transition: right .3s ease-in-out;
+      }
     }
+    @include mobile {
+      width: 100%;
+    }
+  }
+}
+.nav__link.cart__btns {
+  @include tablet {
+    display: none;
+  }
+}
+
+.burger {
+  display: none;
+  margin-right: 14px;
+  --burger-width: 24px;
+  --burger-height: 18px;
+  --burger-line-height: 3px;
+
+  @include burger;
+
+  color: var(--color-white);
+
+  @include tablet {
+    display: block;
+    z-index: 1005;
   }
 }
