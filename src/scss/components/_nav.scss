@@ -73,13 +73,18 @@
     }
   }
 
-  &__item {
+  &__item,
+  &__item-footer {
     &:not(:last-child) {
       margin-right: var(--main-offset);
     }
 
     @include tablet {
-      margin-bottom: 14px;
+      margin-bottom: 28px;
     }
+  }
+
+  &__item-footer {
+    margin-bottom: 14px;
   }
 }

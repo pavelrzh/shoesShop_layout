@@ -10,5 +10,6 @@ import './vendor/simplebar.min.js';
 import './components/cart.js';
 import './components/focus.js';
 import './components/burger.js';
-
+import './vendor/just-validate.min.js';
+import './components/validate.js';
 
