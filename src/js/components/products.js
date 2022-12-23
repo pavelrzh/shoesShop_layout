@@ -26,7 +26,7 @@ const prodSlider = new Swiper('.modal-slider__container', {
 
 if(catalogList) {
   const loadProducts = (quantity = 6) => {
-    fetch('../data/data.json')
+    fetch('data/data.json')
     .then((response) => {
       return response.json();
     })
@@ -105,7 +105,7 @@ if(catalogList) {
   loadProducts(prodQuantity);
 
   const loadModalData = (id = 1) => {                  //загрузка данных для модалки
-    fetch('../data/data.json')
+    fetch('data/data.json')
       .then((response) => {
         return response.json();
       })
@@ -253,7 +253,7 @@ const printQuantity = (num) => {
 }
 
 const loadCartData = (id = 1) => {                  //загрузка данных для корзины
-  fetch('../data/data.json')
+  fetch('data/data.json')
     .then((response) => {
       return response.json();
     })

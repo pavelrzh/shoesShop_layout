@@ -9,19 +9,19 @@ ymaps.ready(init);
       });
       myPlacemark = new ymaps.Placemark([59.93881324988926,30.42935656559991], {}, {  // Координаты метки объекта
         iconLayout: "default#image",
-        iconImageHref: "../../img/Exclude-1.svg", // Ссылка на изображение
+        iconImageHref: "img/Exclude-1.svg", // Ссылка на изображение
         iconImageSize: [25, 35], // Размер изображения
         iconImageOffset: [-3, -42] // Положение изображения
       });
       myPlacemark2 = new ymaps.Placemark([59.92839473388033,30.358905787021758], {}, {  // Координаты метки объекта
         iconLayout: "default#image",
-        iconImageHref: "../../img/Exclude-2.svg", // Ссылка на изображение
+        iconImageHref: "img/Exclude-2.svg", // Ссылка на изображение
         iconImageSize: [25, 35], // Размер изображения
         iconImageOffset: [-3, -42] // Положение изображения
       });
       myPlacemark3 = new ymaps.Placemark([59.95160179506928,30.323613157396778], {}, {  // Координаты метки объекта
         iconLayout: "default#image",
-        iconImageHref: "../../img/Exclude-2.svg", // Ссылка на изображение
+        iconImageHref: "img/Exclude-2.svg", // Ссылка на изображение
         iconImageSize: [25, 35], // Размер изображения
         iconImageOffset: [-3, -42] // Положение изображения
       });
